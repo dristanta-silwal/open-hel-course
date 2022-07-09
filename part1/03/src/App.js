@@ -12,24 +12,44 @@ const App = () => {
     ]
 
     const [index, setSelected] = useState(0)
-    const [like, LikeSet] = useState([0,0,0,0,0,0,0])
+    const [like, LikeSet] = useState({
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0
+    })
 
     const getRand = () => {
         setSelected(Math.floor(Math.random() * anecdotes.length))
     }
 
     const LikeChange = () => {
-        let changed = [...like]
-        changed[index]++
-        LikeSet(changed)
+        LikeSet({ ...like, [index]: like[index] + 1 })
+    }
+
+    const maxLike = () => {
+        let max = -1, maxInd = -1
+
+        for (let key in like) {
+            if (like[key] > max) {
+                maxInd = key
+                max = like[key]
+            }
+        }
+        return maxInd
     }
 
     return (
         <div>
-            <p>{anecdotes[index]}</p>
+            <h1>{anecdotes[index]}</h1>
             <button onClick={getRand}>Next</button> &nbsp;
             <button onClick={LikeChange}>Like</button><br />
-            <p>Likes: {like[index]}</p>
+            <h2>Likes: {like[index]}</h2><br />
+            <h1>Most Liked Anecdote</h1>
+            <h2>{anecdotes[maxLike()]}</h2>
         </div>
     )
 }
