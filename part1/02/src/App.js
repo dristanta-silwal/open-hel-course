@@ -1,11 +1,29 @@
 import { useState } from 'react'
 
+// a proper place to define a component
+const Statistics = (props) => {
+    return (
+        <div>
+            <p>Good: {props.good}</p>
+            <p>Neutral: {props.neutral}</p>
+            <p>Bad: {props.bad}</p>
+            <p>All: {props.all}</p>
+            <p>Average: {((props.good * 1 - props.bad * 1) / props.all).toFixed(5)}</p>
+            <p>Positive: {(props.good / props.all * 100).toFixed(5)}%</p>
+        </div>
+    )
+}
+
 const App = () => {
-    // save clicks of each button to its own state
     const [good, setGood] = useState(0)
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
     const all = good + neutral + bad
+
+    // do not define a component within another component
+    // const Statistics = (props) => {
+    //     // ...
+    // }
 
     return (
         <div>
@@ -13,13 +31,12 @@ const App = () => {
             <button onClick={() => setGood(good + 1)}>Good</button>
             <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
             <button onClick={() => setBad(bad + 1)}>Bad</button>
-            <h1>Statistics</h1>
-            <p>Good: {good}</p>
-            <p>Neutral: {neutral}</p>
-            <p>Bad: {bad}</p>
-            <p>All: {all}</p>
-            <p>Average: {((good * 1 - bad * 1) / all).toFixed(5)}</p>
-            <p>Positive: {(good / all * 100).toFixed(5)}%</p>
+            <Statistics
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                all={all}
+            />
         </div>
     )
 }
