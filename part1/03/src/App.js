@@ -11,12 +11,25 @@ const App = () => {
         'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
     ]
 
-    const [selected, setSelected] = useState(0)
+    const [index, setSelected] = useState(0)
+    const [like, LikeSet] = useState([0,0,0,0,0,0,0])
+
+    const getRand = () => {
+        setSelected(Math.floor(Math.random() * anecdotes.length))
+    }
+
+    const LikeChange = () => {
+        let changed = [...like]
+        changed[index]++
+        LikeSet(changed)
+    }
 
     return (
         <div>
-            <p>{anecdotes[selected]}</p>
-            <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>Next</button>
+            <p>{anecdotes[index]}</p>
+            <button onClick={getRand}>Next</button> &nbsp;
+            <button onClick={LikeChange}>Like</button><br />
+            <p>Likes: {like[index]}</p>
         </div>
     )
 }
