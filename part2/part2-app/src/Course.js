@@ -8,10 +8,12 @@ const Part = ({part}) => <p>{part.name} {part.exercises}</p>;
 
 // Subcomponent to display information about all the parts of a course
 const Content = ({parts}) => {
+    const total = parts.reduce((sum, currentPart) => sum + currentPart.exercises, 0);
 
     return (
         <div>
             {parts.map(part => <Part part={part} key={part.id} />)}
+            <p><strong>total of {total} exercises</strong></p>
         </div>
     );
 };
