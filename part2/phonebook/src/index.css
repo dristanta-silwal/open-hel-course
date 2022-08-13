@@ -1,0 +1,16 @@
+.info {
+    color: royalblue;
+}
+
+.error {
+    color: orange;
+}
+
+.info, .error {
+    background: rgb(130, 130, 130);
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
